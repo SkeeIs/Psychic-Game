@@ -8,7 +8,7 @@ var userGuess;
 var randomLetter;
 var guessLeft = startingGuesses;
 
-//assigns the span html elements to the values of variables guessesLeft & guessHistory
+//function that assigns the span html elements to the values of correlated variables
 function setVars () {
 document.getElementById("remaining-guesses").textContent = guessLeft;
 document.getElementById("wins-text").textContent = wins;
@@ -21,29 +21,27 @@ function alphaPicker () {
   console.log(randomLetter);
 }
 
-//a function to reset the game
+//a function to reset your guesses left & letters already guessed
 function reset () {
     guessLeft = startingGuesses;
     guessHistory = [];
   }
 
-//reset the game to start & assign the variable randomLetter to the output of function alphaPicker
+//initiate setVars function & alphaPicker function to begin games
 setVars ();
 alphaPicker ();
 
 
-//initiate guessing game funcion upon key press (& release)
+//listen for the release of a key
 document.onkeyup = function(event) {
    
     //assign variable userGuess to the key pressed above and push the userGuess to array guessHistory & update HTML
     userGuess = event.key;
     
-    
-    
-    //make sure user's guess is a-z
+    //condition to make sure user's guess is a-z
     if (alphabet.includes(userGuess)) {
         
-        //console.log(alphabet.includes(userGuess));
+        //condition to make sure user's guess is not a repeat
       if (guessHistory.includes(userGuess)) {
         document.getElementById("instructions").textContent = ("You already guessed that letter!");
       }
@@ -56,14 +54,17 @@ document.onkeyup = function(event) {
         setVars();
         }
 
-        //incorrect guess logic
+        //user guess is incorrect
         else if (userGuess !== randomLetter) {
         guessLeft--;
         guessHistory.push(userGuess);
         setVars();
+          
+          //keeps guesses left from going negative & increments losses
           if (guessLeft < 1) {
             document.getElementById("instructions").textContent = ("Out of guesses! Try again!");
             reset();
+            losses++;
           }
         }  
       } 
