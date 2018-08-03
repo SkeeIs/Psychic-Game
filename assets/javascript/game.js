@@ -14,6 +14,7 @@ document.getElementById("remaining-guesses").textContent = guessLeft;
 document.getElementById("wins-text").textContent = wins;
 document.getElementById("losses-text").textContent = losses;
 document.getElementById("guessed").textContent = guessHistory;
+document.getElementById("instructions").textContent = ("Read my mind; guess a letter a-z!");
 }
 //a function to get a random letter from alphabet array
 function alphaPicker () {
@@ -52,6 +53,7 @@ document.onkeyup = function(event) {
         reset();
         alphaPicker();
         setVars();
+        document.getElementById("instructions").textContent = ("You got it! Your psychic power is growing!");
         }
 
         //user guess is incorrect
@@ -62,7 +64,7 @@ document.onkeyup = function(event) {
           
           //keeps guesses left from going negative & increments losses
           if (guessLeft < 1) {
-            document.getElementById("instructions").textContent = ("Out of guesses! Try again!");
+            document.getElementById("instructions").textContent = ("Out of guesses! Your fortune is fading!");
             reset();
             losses++;
           }
@@ -71,6 +73,6 @@ document.onkeyup = function(event) {
     }  
     //alert user to guess a-z if input isn't a letter
     else {
-      document.getElementById("instructions").textContent = ("Please guess a letter a-z!");
+      document.getElementById("instructions").textContent = ("Read my mind; guess a letter a-z!");
     }    
 }
